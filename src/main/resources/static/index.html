@@ -14,10 +14,14 @@
 
 <div ng-controller="NavigationController as navCtl" class="container">
     <ul class="nav nav-pills" role="tablist">
-        <li ng-class="{ active:navCtl.isTabActive('/') }"><a href="/#/">Home</a></li>
-        <li ng-class="{ active:navCtl.isTabActive('/login') }" ng-hide="authenticated"><a href="/#/login">Login</a></li>
-        <li ng-show="authenticated" ng-controller="AuthenticationController as authCtl"><a href=""
-                                                                                           ng-click="authCtl.logout()">Logout</a>
+        <li ng-class="{ active:navCtl.isTabActive('/') }">
+            <a href="/#/">Home</a>
+        </li>
+        <li ng-class="{ active:navCtl.isTabActive('/login') }" ng-hide="authenticated">
+            <a href="/#/login">Login</a>
+        </li>
+        <li ng-show="authenticated" ng-controller="AuthenticationController as authCtl">
+            <a href="" ng-click="authCtl.logout()">Logout</a>
         </li>
     </ul>
 </div>
