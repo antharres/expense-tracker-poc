@@ -8,7 +8,7 @@ import pl.maciejczekp.expense.tracker.users.RegisterUserUseCaseHandler;
 import pl.maciejczekp.expense.tracker.users.UserRepository;
 
 @Configuration
-public class UserUserCasesConfiguration {
+public class UserUseCasesConfiguration {
 
     @Bean
     public RegisterUserUseCase registerUserUseCase(UserRepository userRepository, PasswordEncoder passwordEncoder) {

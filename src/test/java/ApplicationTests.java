@@ -1,8 +1,8 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import pl.maciejczekp.expense.tracker.Application;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -10,8 +10,8 @@ import pl.maciejczekp.expense.tracker.Application;
 @WebAppConfiguration
 public class ApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+    }
 
 }

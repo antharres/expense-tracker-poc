@@ -10,15 +10,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import pl.maciejczekp.expense.tracker.configuration.RepositoryConfiguration;
-import pl.maciejczekp.expense.tracker.configuration.UserUserCasesConfiguration;
+import pl.maciejczekp.expense.tracker.configuration.UserUseCasesConfiguration;
 import pl.maciejczekp.expense.tracker.configuration.security.SecurityBeans;
 import pl.maciejczekp.expense.tracker.model.AppUser;
 import pl.maciejczekp.expense.tracker.model.AppUserRole;
 
+import java.math.BigDecimal;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {
         RepositoryConfiguration.class,
-        UserUserCasesConfiguration.class,
+        UserUseCasesConfiguration.class,
         SecurityBeans.class
 })
 @Transactional
@@ -67,5 +69,24 @@ public class RegisterUserUseCaseHandlerIntegrationTest {
         // When
         registerUserUseCase.execute(request);
         registerUserUseCase.execute(request);
+    }
+
+    @Test
+    public void shouldCreateAccountWithZeroBalanceWhenRegisteringAnUser() throws Exception {
+        // Given
+        String email = "email";
+        String password = "password";
+        RegisterUserUseCase.RegisterUserRequest request = new RegisterUserUseCase.RegisterUserRequest(
+                email,
+                password
+        );
+
+        // When
+        registerUserUseCase.execute(request);
+
+        // Then
+        AppUser userFromDb = userRepository.findOne(email);
+        Assert.assertThat(userFromDb.getAccount(), Matchers.notNullValue());
+        Assert.assertThat(userFromDb.getAccount().getBalance(), Matchers.equalTo(BigDecimal.ZERO));
     }
 }

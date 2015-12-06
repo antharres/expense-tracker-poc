@@ -1,9 +1,6 @@
 package pl.maciejczekp.expense.tracker.model;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class AppUser {
@@ -14,6 +11,10 @@ public class AppUser {
 
     @Enumerated(EnumType.STRING)
     private AppUserRole role;
+
+    @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Account account;
 
     private AppUser() {
     }
@@ -28,6 +29,12 @@ public class AppUser {
         return new AppUser(email, password, role);
     }
 
+    public void createAccount(){
+        this.account = Account.createAccount(this);
+    }
+
+    // ---
+
     public String getEmail() {
         return email;
     }
@@ -38,5 +45,9 @@ public class AppUser {
 
     public AppUserRole getRole() {
         return role;
+    }
+
+    public Account getAccount() {
+        return account;
     }
 }

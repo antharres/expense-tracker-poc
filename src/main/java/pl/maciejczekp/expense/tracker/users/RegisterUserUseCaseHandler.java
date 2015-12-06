@@ -31,6 +31,7 @@ public class RegisterUserUseCaseHandler implements RegisterUserUseCase {
                 AppUserRole.USER
         );
 
-        userRepository.saveAndFlush(user);
+        user.createAccount();
+        userRepository.save(user);
     }
 }
