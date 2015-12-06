@@ -43,7 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/templates/**", "/").permitAll()
                 .antMatchers("/console/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
-                .and().logout().logoutSuccessUrl("/");
+                .and().logout().logoutSuccessUrl("/")
+                .and().formLogin().disable();
         configureCsrf(http);
     }
 
@@ -66,7 +67,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(new UserDetailsProvider(userRepository))
+        auth
+                .userDetailsService(new UserDetailsProvider(userRepository))
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
