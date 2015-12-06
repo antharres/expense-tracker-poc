@@ -20,13 +20,13 @@ public class RegisterUserUseCaseHandler implements RegisterUserUseCase {
 
     @Override
     public void execute(RegisterUserUseCase.RegisterUserRequest request) throws UserAlreadyExistsException {
-        Optional<AppUser> existingUser = userRepository.findOneByEmail(request.getEmail());
+        Optional<AppUser> existingUser = userRepository.findOneByEmail(request.getUsername());
         if (existingUser.isPresent()) {
-            throw new UserAlreadyExistsException(String.format("User with email %s already exists", request.getEmail()));
+            throw new UserAlreadyExistsException(String.format("User with email %s already exists", request.getUsername()));
         }
 
         AppUser user = AppUser.createUser(
-                request.getEmail(),
+                request.getUsername(),
                 passwordEncoder.encode(request.getPassword()),
                 AppUserRole.USER
         );

@@ -5,8 +5,15 @@
             this.credentials = {};
             this.authenticatedUser = {};
             $rootScope.authenticated = false;
+            this.errorMessage = '';
+            this.successMessage = '';
 
-            var authenticate = function (credentials, callback) {
+            var clearMessages = function () {
+                self.errorMessage = '';
+                self.successMessage = '';
+            };
+
+            var authenticate = function (credentials, successCallback, failureCallback) {
                 var headers = credentials ? {
                     authorization: "Basic "
                     + btoa(credentials.username + ":" + credentials.password)
@@ -17,32 +24,48 @@
                     self.authenticatedUser = {
                         name: data.name
                     };
-                    callback && callback();
-                }).error(function () {
+                    successCallback && successCallback(data);
+                }).error(function (data) {
                     $rootScope.authenticated = false;
-                    callback && callback();
+                    failureCallback && failureCallback(data);
                 });
 
             };
 
             authenticate();
 
-            this.login = function () {
-                self.error = false;
-                authenticate(this.credentials, function () {
-                    $location.path("/");
-                    self.error = !$rootScope.authenticated;
-                });
+            this.loginUser = function () {
+                clearMessages();
+                authenticate(
+                    this.credentials,
+                    function (data) {
+                        $location.path("/");
+                    },
+                    function (data) {
+                        self.errorMessage = data.message || 'Invalid credentials';
+                    }
+                );
             };
 
-            this.logout = function () {
+            this.logoutUser = function () {
                 self.authenticatedUser = {};
                 self.credentials = {};
+                clearMessages();
                 $http.post('logout', {}).success(function () {
                     $rootScope.authenticated = false;
                     $location.path("/");
                 }).error(function () {
                     $rootScope.authenticated = false;
+                });
+            };
+
+            this.registerUser = function () {
+                clearMessages();
+                $http.post('/users/', self.credentials).success(function (data) {
+                    $location.path("/");
+                    self.successMessage = data.message;
+                }).error(function (data) {
+                    self.errorMessage = data.message;
                 });
             };
 

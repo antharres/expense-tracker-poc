@@ -4,21 +4,25 @@ public interface RegisterUserUseCase {
     void execute(RegisterUserRequest request) throws UserAlreadyExistsException;
 
     class RegisterUserRequest {
-        private final String email;
-        private final String password;
+        private String username;
+        private String password;
 
-        public RegisterUserRequest(String email, String password) {
-            this.email = email;
+        private RegisterUserRequest() {
+        }
+
+        public RegisterUserRequest(String username, String password) {
+            this.username = username;
             this.password = password;
         }
 
-        public String getEmail() {
-            return email;
+        public String getUsername() {
+            return username;
         }
 
         public String getPassword() {
             return password;
         }
+
     }
 
     class UserAlreadyExistsException extends Exception {
