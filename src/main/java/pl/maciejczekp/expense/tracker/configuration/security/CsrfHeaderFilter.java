@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class CsrfHeaderFilter extends OncePerRequestFilter {
 
-    public static final String COOKIE_NAME = "XSRF-TOKEN";
+    private static final String COOKIE_NAME = "XSRF-TOKEN";
     private final String contextPath;
 
     public CsrfHeaderFilter(String contextPath) {

@@ -27,7 +27,7 @@ import java.util.Collections;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CsrfHeaderFilter CsrfHeaderFilter;
+    private CsrfHeaderFilter csrfHeaderFilter;
 
     @Autowired
     private UserRepository userRepository;
@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             http.csrf().disable()
                     .headers().frameOptions().disable();
         } else {
-            http.addFilterAfter(CsrfHeaderFilter, CsrfFilter.class)
+            http.addFilterAfter(csrfHeaderFilter, CsrfFilter.class)
                     .csrf().csrfTokenRepository(csrfTokenRepository());
         }
         return http;
