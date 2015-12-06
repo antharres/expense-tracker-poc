@@ -13,14 +13,16 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import pl.maciejczekp.expense.tracker.model.AppUser;
 import pl.maciejczekp.expense.tracker.users.UserRepository;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
@@ -32,6 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Value("${app.csrfDisabled}")
     private boolean csrfDisabled;
 
@@ -41,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/templates/**", "/").permitAll()
-                .antMatchers("/console/**").hasAuthority("ADMIN")
+                .antMatchers("/console/**").permitAll()
                 .anyRequest().authenticated()
                 .and().logout().logoutSuccessUrl("/")
                 .and().formLogin().disable();
@@ -69,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(new UserDetailsProvider(userRepository))
-                .passwordEncoder(new BCryptPasswordEncoder());
+                .passwordEncoder(passwordEncoder);
     }
 
     private static class UserDetailsProvider implements UserDetailsService {
@@ -82,9 +87,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-            return userRepository.findOneByEmail(email)
-                    .map(u -> new UserDetail(u.getEmail(), u.getPassword(), Collections.singletonList(new SimpleGrantedAuthority(u.getRole()))))
-                    .orElseThrow(() -> new UsernameNotFoundException(String.format("User with email %s not found", email)));
+            Optional<AppUser> userOptional = userRepository.findOneByEmail(email);
+            return userOptional
+                    .map(u -> new UserDetail(u.getEmail(), u.getPassword(), Collections.singletonList(new SimpleGrantedAuthority(u.getRole().name()))))
+                    .orElseThrow(() -> new UsernameNotFoundException(String.format("AppUser with email %s not found", email)));
         }
 
         private static class UserDetail extends org.springframework.security.core.userdetails.User {
