@@ -1,4 +1,4 @@
-package pl.maciejczekp.expense.tracker.users;
+package pl.maciejczekp.expense.tracker.repositories;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

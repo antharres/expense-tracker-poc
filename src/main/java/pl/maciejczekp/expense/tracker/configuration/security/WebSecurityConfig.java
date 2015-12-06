@@ -19,7 +19,7 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import pl.maciejczekp.expense.tracker.model.AppUser;
-import pl.maciejczekp.expense.tracker.users.UserRepository;
+import pl.maciejczekp.expense.tracker.repositories.UserRepository;
 
 import java.util.Collection;
 import java.util.Collections;

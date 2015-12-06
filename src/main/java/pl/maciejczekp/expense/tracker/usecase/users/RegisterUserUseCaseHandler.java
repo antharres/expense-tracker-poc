@@ -1,8 +1,9 @@
-package pl.maciejczekp.expense.tracker.users;
+package pl.maciejczekp.expense.tracker.usecase.users;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.maciejczekp.expense.tracker.model.AppUser;
 import pl.maciejczekp.expense.tracker.model.AppUserRole;
+import pl.maciejczekp.expense.tracker.repositories.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.Optional;

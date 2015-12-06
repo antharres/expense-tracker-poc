@@ -1,4 +1,4 @@
-package pl.maciejczekp.expense.tracker.users;
+package pl.maciejczekp.expense.tracker.usecase.users;
 
 public interface RegisterUserUseCase {
     void execute(RegisterUserRequest request) throws UserAlreadyExistsException;

@@ -1,4 +1,4 @@
-package pl.maciejczekp.expense.tracker.accounts;
+package pl.maciejczekp.expense.tracker.usecase.accounts;
 
 import pl.maciejczekp.expense.tracker.model.Account;
 

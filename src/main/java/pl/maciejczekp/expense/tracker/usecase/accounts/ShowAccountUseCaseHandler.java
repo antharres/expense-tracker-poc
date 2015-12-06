@@ -1,10 +1,10 @@
-package pl.maciejczekp.expense.tracker.accounts;
+package pl.maciejczekp.expense.tracker.usecase.accounts;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.maciejczekp.expense.tracker.model.Account;
 import pl.maciejczekp.expense.tracker.model.AppUser;
-import pl.maciejczekp.expense.tracker.users.UserRepository;
+import pl.maciejczekp.expense.tracker.repositories.UserRepository;
 
 import javax.transaction.Transactional;
 

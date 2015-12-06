@@ -2,9 +2,9 @@ package pl.maciejczekp.expense.tracker.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.maciejczekp.expense.tracker.accounts.ShowAccountUseCase;
-import pl.maciejczekp.expense.tracker.accounts.ShowAccountUseCaseHandler;
-import pl.maciejczekp.expense.tracker.users.UserRepository;
+import pl.maciejczekp.expense.tracker.usecase.accounts.ShowAccountUseCase;
+import pl.maciejczekp.expense.tracker.usecase.accounts.ShowAccountUseCaseHandler;
+import pl.maciejczekp.expense.tracker.repositories.UserRepository;
 
 @Configuration
 public class AccountUseCasesConfiguration {

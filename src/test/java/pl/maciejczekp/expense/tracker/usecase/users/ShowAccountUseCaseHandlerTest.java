@@ -1,4 +1,4 @@
-package pl.maciejczekp.expense.tracker.users;
+package pl.maciejczekp.expense.tracker.usecase.users;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import pl.maciejczekp.expense.tracker.accounts.ShowAccountUseCase;
+import pl.maciejczekp.expense.tracker.repositories.UserRepository;
+import pl.maciejczekp.expense.tracker.usecase.accounts.ShowAccountUseCase;
 import pl.maciejczekp.expense.tracker.configuration.AccountUseCasesConfiguration;
 import pl.maciejczekp.expense.tracker.configuration.RepositoryConfiguration;
 import pl.maciejczekp.expense.tracker.configuration.UserUseCasesConfiguration;

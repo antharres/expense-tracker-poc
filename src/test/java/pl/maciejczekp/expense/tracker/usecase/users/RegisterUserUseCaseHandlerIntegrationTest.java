@@ -1,4 +1,4 @@
-package pl.maciejczekp.expense.tracker.users;
+package pl.maciejczekp.expense.tracker.usecase.users;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -14,6 +14,7 @@ import pl.maciejczekp.expense.tracker.configuration.UserUseCasesConfiguration;
 import pl.maciejczekp.expense.tracker.configuration.security.SecurityBeans;
 import pl.maciejczekp.expense.tracker.model.AppUser;
 import pl.maciejczekp.expense.tracker.model.AppUserRole;
+import pl.maciejczekp.expense.tracker.repositories.UserRepository;
 
 import java.math.BigDecimal;
 
