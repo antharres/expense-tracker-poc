@@ -28,6 +28,7 @@
             authenticate();
 
             this.login = function () {
+                self.error = false;
                 authenticate(this.credentials, function () {
                     $location.path("/");
                     self.error = !$rootScope.authenticated;
