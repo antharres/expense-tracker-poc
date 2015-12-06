@@ -1,0 +1,36 @@
+<h1>Your account</h1>
+<!--<div class="container-fluid">-->
+<!--<div class="row">-->
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Balance
+            <span class="label" ng-class="{
+            'label-danger': accountCtl.balanceInDanger(),
+            'label-success': accountCtl.balanceInGreen(),
+            'label-warning': accountCtl.balanceInWarining()}"
+            >
+                {{ accountCtl.account.balance | currency }}
+            </span>
+        </h3>
+        <table class="table">
+            <caption>Expenses: {{accountCtl.account.entries.length}} records</caption>
+            <subcaption></subcaption>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="entry in accountCtl.account.entries | orderBy:'-date' ">
+                <th scope="row">{{ $index }}</th>
+                <td>{{entry.date | date:'dd MMM yyyy HH:mm:ss' }}</td>
+                <td>{{entry.type}}</td>
+                <td>{{entry.amount | currency}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

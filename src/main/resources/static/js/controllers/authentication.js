@@ -39,7 +39,7 @@
                 authenticate(
                     this.credentials,
                     function (data) {
-                        $location.path("/");
+                        $location.path("/account/");
                     },
                     function (data) {
                         self.errorMessage = data.message || 'Invalid credentials';

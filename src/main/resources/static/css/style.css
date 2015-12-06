@@ -3,6 +3,15 @@ body {
     padding: 50px;
 }
 
+div.container {
+    background: #fefefe;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-height: 80%;
+}
+
 #login-dp {
     min-width: 250px;
     padding: 14px 14px 0;

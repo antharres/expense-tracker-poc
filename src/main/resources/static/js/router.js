@@ -5,6 +5,10 @@
                 templateUrl: '../templates/greeting.html',
                 controller: 'GreetingController',
                 controllerAs: 'greetingCtl'
+            }).when('/account/', {
+                templateUrl: '../templates/account.html',
+                controller: 'AccountController',
+                controllerAs: 'accountCtl'
             }).otherwise('/');
 
             $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
