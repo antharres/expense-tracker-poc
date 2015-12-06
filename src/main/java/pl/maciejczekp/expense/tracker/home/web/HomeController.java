@@ -1,4 +1,4 @@
-package pl.maciejczekp.expense.tracker.web;
+package pl.maciejczekp.expense.tracker.home.web;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-public class UiApplication {
+public class HomeController {
 
     @RequestMapping("/resource")
     public Map<String, Object> home() {
