@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pl.maciejczekp.expense.tracker.ApplicationResponse;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping(value = "/users/")
-public class UserController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+public class UsersController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UsersController.class);
 
     @Autowired
     private RegisterUserUseCase registerUserUseCase;
@@ -34,5 +35,12 @@ public class UserController {
                     ApplicationResponse.error(e.getMessage())
             );
         }
+    }
+
+    @RequestMapping("current/")
+    public ResponseEntity<ApplicationResponse<Principal>> user(Principal user) {
+        return ResponseEntity.ok(
+                ApplicationResponse.success(user)
+        );
     }
 }

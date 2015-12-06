@@ -19,10 +19,10 @@
                     + btoa(credentials.username + ":" + credentials.password)
                 } : {};
 
-                $http.get('/user', {headers: headers}).success(function (data) {
-                    $rootScope.authenticated = !!data.name;
+                $http.get('/users/current/', {headers: headers}).success(function (data) {
+                    $rootScope.authenticated = true;
                     self.authenticatedUser = {
-                        name: data.name
+                        name: data.value.name
                     };
                     successCallback && successCallback(data);
                 }).error(function (data) {
