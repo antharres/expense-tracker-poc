@@ -1,0 +1,1 @@
+Using bootstrap template from http://bootsnipp.com/snippets/featured/fancy-navbar-login-sign-in-form
