@@ -1,13 +1,22 @@
 package pl.maciejczekp.expense.tracker.model;
 
+import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.math.BigDecimal;
 
 public class AppUserTest {
 
     @Test
-    public void equalsShouldReturnTrueForEqualUsers() throws Exception {
-        AppUser u1 = AppUser.createUser("user1", "password", AppUserRole.USER);
+    public void shouldSetRelationshipBetweenUserAndAccountWhenCreatingAccount() throws Exception {
+        // Given
+        AppUser user = AppUser.createUser("email", "password", AppUserRole.USER);
+        // When
+        user.createAccount();
+
+        // Then
+        Assert.assertThat(user.getAccount().getUser(), Matchers.is(user));
+        Assert.assertThat(user.getAccount().getBalance(), Matchers.equalTo(BigDecimal.ZERO));
     }
 }
