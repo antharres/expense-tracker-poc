@@ -1,4 +1,4 @@
-package pl.maciejczekp.expense.tracker.web.iface;
+package pl.maciejczekp.expense.tracker.web;
 
 public class ApplicationResponse<T> {
     private final T value;

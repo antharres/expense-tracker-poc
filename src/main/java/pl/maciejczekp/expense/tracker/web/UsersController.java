@@ -1,4 +1,4 @@
-package pl.maciejczekp.expense.tracker.usecase.users.web;
+package pl.maciejczekp.expense.tracker.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pl.maciejczekp.expense.tracker.web.iface.ApplicationResponse;
 import pl.maciejczekp.expense.tracker.usecase.users.RegisterUserUseCase;
 
 import javax.validation.Valid;
