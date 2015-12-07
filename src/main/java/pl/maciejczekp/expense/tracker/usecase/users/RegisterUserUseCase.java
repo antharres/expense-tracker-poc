@@ -1,10 +1,16 @@
 package pl.maciejczekp.expense.tracker.usecase.users;
 
+import org.hibernate.validator.constraints.Email;
+
+import javax.validation.constraints.Size;
+
 public interface RegisterUserUseCase {
     void execute(RegisterUserRequest request) throws UserAlreadyExistsException;
 
     class RegisterUserRequest {
+        @Email
         private String username;
+        @Size(min = 0)
         private String password;
 
         private RegisterUserRequest() {

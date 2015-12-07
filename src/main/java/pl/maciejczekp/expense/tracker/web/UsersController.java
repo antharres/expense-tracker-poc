@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,7 @@ import pl.maciejczekp.expense.tracker.usecase.users.RegisterUserUseCase;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/users/")
@@ -24,6 +26,11 @@ public class UsersController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<ApplicationResponse<String>> createUser(@Valid @RequestBody RegisterUserUseCase.RegisterUserRequest request, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(ApplicationResponse.error(
+                    bindingResult.getFieldErrors().stream().map(FieldError::toString).collect(Collectors.joining("<br />"))
+            ));
+        }
         try {
             registerUserUseCase.execute(request);
             return ResponseEntity.ok(
