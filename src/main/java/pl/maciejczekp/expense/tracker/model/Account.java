@@ -34,4 +34,7 @@ public class Account {
         return balance;
     }
 
+    AppUser getUser() {
+        return user;
+    }
 }

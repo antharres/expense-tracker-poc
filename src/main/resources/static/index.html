@@ -32,8 +32,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li ng-class="{active: navCtl.isTabActive('/')}"><a href="/#/">Home</a></li>
-                <li ng-class="{active: navCtl.isTabActive('/account/')}"><a href="/#/account/">Account</a></li>
-                <li class="dropdown">
+                <li ng-class="{active: navCtl.isTabActive('/account/')}" ng-show="authenticated"><a href="/#/account/">Account</a></li>
+                <li class="dropdown" ng-show="authenticated">
                     <a href class="dropdown-toggle" data-toggle="dropdown">Expenses <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href>View</a></li>
