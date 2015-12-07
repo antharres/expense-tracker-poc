@@ -3,17 +3,36 @@
 <!--<div class="row">-->
 <div class="panel panel-default">
     <div class="panel-body">
-        <h3>Balance
-            <span class="label" ng-class="{
-            'label-danger': accountCtl.balanceInDanger(),
-            'label-success': accountCtl.balanceInGreen(),
-            'label-warning': accountCtl.balanceInWarining()}"
-            >
-                {{ accountCtl.account.balance | currency }}
-            </span>
-        </h3>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h3>Balance
+                        <span class="label" ng-class="{
+                        'label-danger': accountCtl.balanceInDanger(),
+                        'label-success': accountCtl.balanceInGreen(),
+                        'label-warning': accountCtl.balanceInWarining()}"
+                        >
+                            {{ accountCtl.account.balance | currency }}
+                        </span>
+                    </h3>
+                </div>
+                <h3>
+                    <div class="col-xs-2">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="accountCtl.clearMessages()">
+                            <span class="glyphicon glyphicon-plus-sign"></span> New entry
+                        </button>
+                    </div>
+                </h3>
+            </div>
+        </div>
+
         <table class="table">
-            <caption>Expenses: {{accountCtl.account.entries.length}} records</caption>
+            <caption>
+                Expenses: {{accountCtl.account.entries.length}} records
+                <button type="button" class="btn btn-primary" ng-click="accountCtl.refreshAccountData()">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                </button>
+            </caption>
             <subcaption></subcaption>
             <thead>
             <tr>
@@ -32,5 +51,49 @@
             </tr>
             </tbody>
         </table>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <label for="date">Date</label>
+                            <input id="date" type="datetime" placeholder="yyyy-MM-dd HH:mm:ss" ng-model="accountCtl.newEntry.date" class="form-control"
+                                   required>
+                            <label for="amount">Amount</label>
+                            <input id="amount" type="number" ng-model="accountCtl.newEntry.amount" class="form-control"
+                                   min="0">
+                            <label for="type">Type</label>
+                            <select id="type"
+                                    ng-options="type as type.name for type in accountCtl.entryTypes track by type.value"
+                                    ng-model="accountCtl.newEntry.type" class="form-control" required></select>
+                        </form>
+                        <div class="alert alert-warning" role="alert" ng-cloak ng-show="accountCtl.errorMessage">
+                            <p class="error"><span class="glyphicon glyphicon-warning-sign"></span><strong>
+                                Error</strong></p>
+
+                            <p>{{ accountCtl.errorMessage }}</p>
+                        </div>
+                        <div class="alert alert-success" role="alert" ng-cloak ng-show="accountCtl.successMessage">
+                            <p class="info"><span class="glyphicon glyphicon-ok"></span><strong> Success</strong></p>
+
+                            <p>{{ accountCtl.successMessage }}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-disabled="accountCtl.successMessage"
+                                ng-click="accountCtl.addNewEntry()">Save changes
+                        </button>
+                    </div>
+                </div>
+            </div
+        </div>
     </div>
 </div>

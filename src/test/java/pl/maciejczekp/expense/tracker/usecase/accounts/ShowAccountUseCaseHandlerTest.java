@@ -1,4 +1,4 @@
-package pl.maciejczekp.expense.tracker.usecase.users;
+package pl.maciejczekp.expense.tracker.usecase.accounts;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -16,6 +16,7 @@ import pl.maciejczekp.expense.tracker.configuration.RepositoryConfiguration;
 import pl.maciejczekp.expense.tracker.configuration.UserUseCasesConfiguration;
 import pl.maciejczekp.expense.tracker.configuration.security.SecurityBeans;
 import pl.maciejczekp.expense.tracker.model.Account;
+import pl.maciejczekp.expense.tracker.usecase.users.RegisterUserUseCase;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
