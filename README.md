@@ -4,12 +4,13 @@ Bootstrap template: [http://bootsnipp.com/snippets/featured/fancy-navbar-login-s
 TODO:
 
 * GUI tests
-* Adding new entries
+* Removing existing entries
 * Fix integration tests to not start webapp
 
 Tests:
 
 * End-to-end tests for usecases
+* Unit tests for model
 
 Tech:
 
